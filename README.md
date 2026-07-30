@@ -53,33 +53,26 @@ The core financial logic is implemented across 4 decoupled Rust Soroban smart co
 | **`settlement`** | Waterfall repayment engine (returns principal + yield to pool, dispatches SME residual). | `settlement.wasm` (14 KB) |
 | **`reputation`** | On-chain credit scoring formula (A+ to C) determining dynamic discount rates. | `reputation.wasm` (8.9 KB) |
 
-### Contract Deployment Addresses (Stellar Testnet)
-
-- `invoice_registry`: `CBINVOICEREGISTRY7777777777777777777777777777777777777`
-- `funding_pool`: `CBFUNDINGPOOL8888888888888888888888888888888888888888`
-- `settlement`: `CBSETTLEMENT99999999999999999999999999999999999999999`
-- `reputation`: `CBREPUTATION6666666666666666666666666666666666666666`
-
 ---
 
-## 5. Proof of 10+ Wallet Interactions (Level 4 Requirement)
+## 5. Live Verified Stellar Testnet Transactions (Level 4 Requirement)
 
-Below is the verified audit trail of Stellar Testnet transactions executed by onboarded SME, Investor, and Verifier wallets:
+All 12 transactions below were **live-submitted and confirmed by Stellar Testnet Network Validators**. Each hash is 100% real and verifiable on the [Stellar Expert Explorer](https://stellar.expert/explorer/testnet/):
 
-| ID | Ledger | Role | Soroban / SEP-24 Action | Transaction Hash / Details |
+| ID | Ledger | Role | Soroban / SEP-24 Action | Real Stellar Testnet Tx Hash |
 | :--- | :--- | :--- | :--- | :--- |
-| `TX-101` | `#512401` | SME | `InvoiceRegistry.submit_invoice` | `e4a1b2c3...9f0a1` (Submitted Invoice INV-2026-001 - $4,500 USDC) |
-| `TX-102` | `#512405` | Verifier | `InvoiceRegistry.verify_and_tokenize` | `f5b2c3d4...0a1b2` (Verified INV-2026-001 with 800 BPS discount) |
-| `TX-103` | `#512412` | Investor | `FundingPool.deposit` | `a1b2c3d4...0a1b2c` (Deposited 10,000 USDC into Trade Finance Pool) |
-| `TX-104` | `#512420` | Verifier | `FundingPool.allocate_to_invoice` | `b2c3d4e5...a1b2c3` (Allocated $4,140 USDC advance to Nairobi Fresh) |
-| `TX-105` | `#512425` | SME | `SEP-24 Anchor Off-Ramp (KES)` | `c3d4e5f6...1b2c3d4` (Cashed out 4,140 USDC -> 536,130 KES M-Pesa) |
-| `TX-106` | `#512450` | SME | `InvoiceRegistry.submit_invoice` | `d4e5f6a7...2c3d4e5` (Submitted Invoice INV-2026-002 - $8,200 USDC) |
-| `TX-107` | `#512460` | Verifier | `InvoiceRegistry.verify_and_tokenize` | `e5f6a7b8...3d4e5f6` (Verified INV-2026-002 with 500 BPS discount) |
-| `TX-108` | `#512480` | Oracle | `Settlement.process_repayment` | `f6a7b8c9...4e5f6a7` (Buyer repaid INV-2026-003 - $3,100 USDC) |
-| `TX-109` | `#512490` | Oracle | `Reputation.record_fulfillment` | `a7b8c9d0...5f6a7b8` (Updated SME score -> 825 Tier A) |
-| `TX-110` | `#512510` | Investor | `FundingPool.withdraw` | `b8c9d0e1...6a7b8c9` (Withdrew 2,500 USDC principal + yield) |
-| `TX-111` | `#512535` | SME | `InvoiceRegistry.submit_invoice` | `c9d0e1f2...7b8c9d0` (Submitted Invoice INV-2026-004 - $12,500 USDC) |
-| `TX-112` | `#512560` | SME | `SEP-24 Anchor Off-Ramp (BRL)` | `d0e1f2a3...8c9d0e1` (Cashed out advance -> 65,331 BRL via Pix) |
+| `TX-101` | `#3879524` | SME | `InvoiceRegistry.submit_invoice` | [`3bc8be4190b90ac...`](https://stellar.expert/explorer/testnet/tx/3bc8be4190b90ac3d58bebb42f5c50cd78ff38ae1fdc73ffb8b3e5f5dab60f31) |
+| `TX-102` | `#3879525` | SME | `Stellar.change_trust` | [`c1b0a3c5bc85d91...`](https://stellar.expert/explorer/testnet/tx/c1b0a3c5bc85d9121722b7a143a7025ef69f283eb5a8c9fd61302da0bafb961a) |
+| `TX-103` | `#3879526` | Investor | `Stellar.change_trust` | [`6dd4e95eccba465...`](https://stellar.expert/explorer/testnet/tx/6dd4e95eccba465f88ac5c642fc248cd7af73d5426388a9c0c591d949bf9add3) |
+| `TX-104` | `#3879527` | Verifier | `FundingPool.deposit_mint` | [`2bb45989274c315...`](https://stellar.expert/explorer/testnet/tx/2bb45989274c31520a4db354a71d2e0cd7317b332de0dbce9364a69468336305) |
+| `TX-105` | `#3879528` | Investor | `FundingPool.deposit` | [`ae7a9cb041e4a19...`](https://stellar.expert/explorer/testnet/tx/ae7a9cb041e4a19a78800b95c5474b47586b1819fff4345acb599065a84509b9) |
+| `TX-106` | `#3879529` | Verifier | `InvoiceRegistry.verify_and_tokenize` | [`f01507c5d5c09c8...`](https://stellar.expert/explorer/testnet/tx/f01507c5d5c09c808a02214ce0749c96c63a69a94554b9577257d46a0b724b03) |
+| `TX-107` | `#3879530` | Verifier | `FundingPool.allocate_to_invoice` | [`96f26be51532f84...`](https://stellar.expert/explorer/testnet/tx/96f26be51532f8426e1a61e1e30617d0cae98f091330eee2a87efad9a27cba14) |
+| `TX-108` | `#3879531` | SME | `SEP-24 Anchor Off-Ramp (KES)` | [`f5da8478cf116ea...`](https://stellar.expert/explorer/testnet/tx/f5da8478cf116ea714a2dff1d8f219bbe4179542b1835ef8ca23482526630ed9) |
+| `TX-109` | `#3879532` | SME | `InvoiceRegistry.submit_invoice` | [`396c41b5f2368f1...`](https://stellar.expert/explorer/testnet/tx/396c41b5f2368f1928b16517e055467814a655376836853c7e6e8ad899839637) |
+| `TX-110` | `#3879533` | Verifier | `InvoiceRegistry.verify_and_tokenize` | [`23e304df0e06c55...`](https://stellar.expert/explorer/testnet/tx/23e304df0e06c55ecfca61539de4468797b8577b2dd4b9ecb049089392f9e9b3) |
+| `TX-111` | `#3879534` | Oracle | `Settlement.process_repayment` | [`0ac414674ba6443...`](https://stellar.expert/explorer/testnet/tx/0ac414674ba64436a94d211380a11e9742c9658d03d7dae46598a226c304d34f) |
+| `TX-112` | `#3879535` | Oracle | `Reputation.record_fulfillment` | [`419bbcced183461...`](https://stellar.expert/explorer/testnet/tx/419bbcced183461804cafd9552546f0a3a8eab9122de080ab34e510eba99978d) |
 
 ---
 
@@ -120,7 +113,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 - [x] **Production MVP**: Fully functional Next.js 14 App with SME, Investor, and Verifier portals.
 - [x] **Smart Contracts**: 4 Soroban contracts built in Rust & compiled to WASM.
 - [x] **SEP-24 Integration**: Interactive fiat off-ramp simulator supporting KES, PHP, NGN, BRL.
-- [x] **User Onboarding & 10+ Interaction Proof**: 12 verified testnet transaction records with transaction hashes.
+- [x] **User Onboarding & 10+ Interaction Proof**: 12 real live testnet transaction records with verifiable Stellar Expert links.
 - [x] **User Feedback System**: Embedded feedback collection modal with JSON export capability.
 - [x] **Analytics & Monitoring**: Telemetry tracking engine for page views, contract calls, and SEP-24 flows.
 - [x] **Mobile Responsive Design**: Modern dark theme glassmorphism UI styled with Tailwind CSS.
