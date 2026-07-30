@@ -101,7 +101,7 @@ All 12 transactions below were **live-submitted and confirmed by Stellar Testnet
 *Real-time analytics telemetry engine tracking page views, Soroban smart contract invocations, and SEP-24 anchor sessions.*
 
 ### 7.4 Walkthrough & Demo Video
-[![Anchora Video Demo](https://img.shields.io/badge/Watch-Demo%20Video-red?style=for-the-badge&logo=youtube)](YOUR_DEMO_VIDEO_LINK_HERE)
+[![Anchora Video Demo](https://img.shields.io/badge/Watch-Demo%20Video-red?style=for-the-badge&logo=youtube)](https://youtu.be/YgPlXZfSHws)
 
 ---
 
