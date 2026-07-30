@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Next.js Build Output
+frontend/.next/
+frontend/out/
+
+# Rust / Cargo Build Output
+contracts/target/
+
+# IDE & Logs
+.vscode/
+.idea/
+*.log
+.DS_Store
