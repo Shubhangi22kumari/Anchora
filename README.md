@@ -103,8 +103,6 @@ All 12 transactions below were **live-submitted and confirmed by Stellar Testnet
 ### 7.4 Walkthrough & Demo Video
 [![Anchora Video Demo](https://img.shields.io/badge/Watch-Demo%20Video-red?style=for-the-badge&logo=youtube)](YOUR_DEMO_VIDEO_LINK_HERE)
 
-> 📹 **Video Demo**: [Click here to watch the full Anchora Soroban & SEP-24 Level 4 walkthrough video](YOUR_DEMO_VIDEO_LINK_HERE)
-
 ---
 
 ## 8. Local Setup & Installation
