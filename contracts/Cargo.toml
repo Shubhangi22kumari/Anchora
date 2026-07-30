@@ -1,0 +1,20 @@
+[workspace]
+resolver = "2"
+members = [
+    "invoice_registry",
+    "funding_pool",
+    "settlement",
+    "reputation",
+]
+
+[workspace.dependencies]
+soroban-sdk = "21.4.0"
+
+[profile.release]
+opt-level = "z"
+overflow-checks = true
+debug = false
+strip = "symbols"
+debug-assertions = false
+panic = "abort"
+codegen-units = 1
