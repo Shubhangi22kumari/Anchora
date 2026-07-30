@@ -89,16 +89,21 @@ All 12 transactions below were **live-submitted and confirmed by Stellar Testnet
 ## 7. Product Screenshots & Demo Artifacts
 
 ### 7.1 Product UI Dashboard
-![Product UI Dashboard](./docs/screenshots/product_ui.png)
+![Product UI Dashboard](image-1.png)
 *Anchora RWA Factoring platform interface featuring real-world trade receivables, yield metrics, and credit risk scoring.*
 
 ### 7.2 Mobile Responsive Design
-![Mobile Responsive Design](./docs/screenshots/mobile_responsive.png)
+![Mobile Responsive Design](image-2.png)
 *Fully responsive mobile view optimized for emerging market SME exporters accessing working capital on mobile devices.*
 
 ### 7.3 Analytics & Monitoring Setup
-![Analytics & Telemetry Monitoring Setup](./docs/screenshots/analytics_monitoring.png)
+![Analytics & Telemetry Monitoring Setup](image-3.png)
 *Real-time analytics telemetry engine tracking page views, Soroban smart contract invocations, and SEP-24 anchor sessions.*
+
+### 7.4 Walkthrough & Demo Video
+[![Anchora Video Demo](https://img.shields.io/badge/Watch-Demo%20Video-red?style=for-the-badge&logo=youtube)](YOUR_DEMO_VIDEO_LINK_HERE)
+
+> 📹 **Video Demo**: [Click here to watch the full Anchora Soroban & SEP-24 Level 4 walkthrough video](YOUR_DEMO_VIDEO_LINK_HERE)
 
 ---
 
