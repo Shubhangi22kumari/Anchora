@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import { ArrowRight, Zap, TrendingUp } from 'lucide-react';
 import { INITIAL_POOL_STATS } from '../lib/mockData';
+import { formatNum } from '../lib/types';
 import { UserInteractionsLog } from '../components/UserInteractionsLog';
 
 export default function HomePage() {
@@ -47,7 +48,7 @@ export default function HomePage() {
       <section className="grid grid-cols-2 md:grid-cols-4 gap-4">
         <div className="rounded-2xl glass-card p-5 border border-slate-800">
           <div className="text-xs text-slate-400 font-medium">Total Liquidity Pool</div>
-          <div className="text-2xl font-bold text-white mt-1">${INITIAL_POOL_STATS.totalLiquidity.toLocaleString()} USDC</div>
+          <div className="text-2xl font-bold text-white mt-1">${formatNum(INITIAL_POOL_STATS.totalLiquidity)} USDC</div>
           <div className="text-[11px] text-emerald-400 mt-1 flex items-center gap-1">
             <TrendingUp className="h-3 w-3" /> +14.2% this month
           </div>
@@ -55,7 +56,7 @@ export default function HomePage() {
 
         <div className="rounded-2xl glass-card p-5 border border-slate-800">
           <div className="text-xs text-slate-400 font-medium">Active Receivables Funded</div>
-          <div className="text-2xl font-bold text-blue-400 mt-1">${INITIAL_POOL_STATS.allocatedCapital.toLocaleString()} USDC</div>
+          <div className="text-2xl font-bold text-blue-400 mt-1">${formatNum(INITIAL_POOL_STATS.allocatedCapital)} USDC</div>
           <div className="text-[11px] text-slate-400 mt-1">{INITIAL_POOL_STATS.activeInvoicesCount} Active SME Invoices</div>
         </div>
 

@@ -78,3 +78,8 @@ export interface FeedbackEntry {
   usabilityScore: number;
   comments: string;
 }
+
+export function formatNum(val: number, options?: Intl.NumberFormatOptions): string {
+  return new Intl.NumberFormat('en-US', options).format(val);
+}
+
