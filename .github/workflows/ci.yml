@@ -5,6 +5,10 @@ on:
   pull_request:
     branches: [ "master", "main" ]
 
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
 jobs:
   contracts:
     name: Contract Verification
@@ -22,14 +26,11 @@ jobs:
         uses: actions/cache@v4
         with:
           path: |
-            ~/.cargo/bin/
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
             ~/.cargo/git/db/
             contracts/target/
-          key: ${{ runner.os }}-cargo-ci-${{ hashFiles('**/Cargo.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-cargo-ci-
+          key: ${{ runner.os }}-cargo-v3-${{ hashFiles('contracts/Cargo.lock') }}
       - name: Build Contracts
         run: cargo build --target wasm32-unknown-unknown --release
       - name: Run Contract Tests
