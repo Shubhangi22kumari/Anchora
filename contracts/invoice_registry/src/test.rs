@@ -10,7 +10,7 @@ fn test_invoice_registry_flow() {
     let admin = Address::generate(&env);
     let sme = Address::generate(&env);
 
-    let contract_id = env.register(InvoiceRegistryContract, ());
+    let contract_id = env.register_contract(None, InvoiceRegistryContract);
     let client = InvoiceRegistryContractClient::new(&env, &contract_id);
 
     client.initialize(&admin);

@@ -10,7 +10,7 @@ fn test_funding_pool_flow() {
     let admin = Address::generate(&env);
     let investor = Address::generate(&env);
 
-    let contract_id = env.register(FundingPoolContract, ());
+    let contract_id = env.register_contract(None, FundingPoolContract);
     let client = FundingPoolContractClient::new(&env, &contract_id);
 
     client.initialize(&admin);

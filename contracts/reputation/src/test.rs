@@ -10,7 +10,7 @@ fn test_reputation_scoring() {
     let admin = Address::generate(&env);
     let sme = Address::generate(&env);
 
-    let contract_id = env.register(ReputationContract, ());
+    let contract_id = env.register_contract(None, ReputationContract);
     let client = ReputationContractClient::new(&env, &contract_id);
 
     client.initialize(&admin);

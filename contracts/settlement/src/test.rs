@@ -9,7 +9,7 @@ fn test_settlement_waterfall() {
 
     let admin = Address::generate(&env);
 
-    let contract_id = env.register(SettlementContract, ());
+    let contract_id = env.register_contract(None, SettlementContract);
     let client = SettlementContractClient::new(&env, &contract_id);
 
     client.initialize(&admin);
