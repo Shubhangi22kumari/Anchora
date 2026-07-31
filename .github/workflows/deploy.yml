@@ -1,0 +1,83 @@
+name: Deploy Contracts to Testnet
+on:
+  workflow_dispatch:
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  deploy:
+    name: Deploy to Testnet
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./contracts
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+      - name: Cache cargo registry and binaries
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            ~/.cargo/bin
+            contracts/target
+          key: ${{ runner.os }}-cargo-deploy-${{ hashFiles('contracts/Cargo.lock') }}
+
+      - name: Install cargo-binstall
+        run: |
+          curl -L --proto '=https' --tlsv1.2 -sSf https://raw.githubusercontent.com/cargo-bins/cargo-binstall/main/install-from-binstall-release.sh | bash
+          echo "$HOME/.cargo/bin" >> $GITHUB_PATH
+
+      - name: Install Stellar CLI
+        run: cargo binstall --no-confirm stellar-cli
+
+      - name: Build contracts
+        run: |
+          cargo build --target wasm32-unknown-unknown --release
+          stellar contract optimize --wasm target/wasm32-unknown-unknown/release/invoice_registry.wasm
+          stellar contract optimize --wasm target/wasm32-unknown-unknown/release/funding_pool.wasm
+          stellar contract optimize --wasm target/wasm32-unknown-unknown/release/settlement.wasm
+          stellar contract optimize --wasm target/wasm32-unknown-unknown/release/reputation.wasm
+
+      - name: Deploy to Testnet
+        run: |
+          echo "Generating identities..."
+          stellar keys generate deployer --network testnet
+          stellar keys fund deployer --network testnet
+          
+          echo "Deploying Invoice Registry..."
+          INVOICE_REGISTRY_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/invoice_registry.optimized.wasm \
+            --source deployer \
+            --network testnet 2>deploy_invoice_err.log) || { cat deploy_invoice_err.log; exit 1; }
+          echo "Invoice Registry deployed at: $INVOICE_REGISTRY_ID"
+
+          echo "Deploying Funding Pool..."
+          FUNDING_POOL_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/funding_pool.optimized.wasm \
+            --source deployer \
+            --network testnet 2>deploy_funding_err.log) || { cat deploy_funding_err.log; exit 1; }
+          echo "Funding Pool deployed at: $FUNDING_POOL_ID"
+
+          echo "Deploying Settlement..."
+          SETTLEMENT_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/settlement.optimized.wasm \
+            --source deployer \
+            --network testnet 2>deploy_settlement_err.log) || { cat deploy_settlement_err.log; exit 1; }
+          echo "Settlement deployed at: $SETTLEMENT_ID"
+
+          echo "Deploying Reputation..."
+          REPUTATION_ID=$(stellar contract deploy \
+            --wasm target/wasm32-unknown-unknown/release/reputation.optimized.wasm \
+            --source deployer \
+            --network testnet 2>deploy_reputation_err.log) || { cat deploy_reputation_err.log; exit 1; }
+          echo "Reputation deployed at: $REPUTATION_ID"
+
+          echo "Fetching Test Token (Native XLM asset) ID..."
+          TOKEN_ID=$(stellar contract id asset --asset native --network testnet)
+          echo "Native Token ID is: $TOKEN_ID"
