@@ -77,7 +77,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose })
           <div className="py-8 flex flex-col items-center justify-center text-center">
             <CheckCircle2 className="h-14 w-14 text-emerald-400 mb-3 animate-bounce" />
             <h4 className="text-base font-bold text-white">Feedback Submitted!</h4>
-            <p className="text-xs text-slate-300">Thank you for validating Anchora's trade finance platform.</p>
+            <p className="text-xs text-slate-300">Thank you for validating Anchora&apos;s trade finance platform.</p>
           </div>
         ) : (
           <div className="space-y-5">
@@ -173,7 +173,7 @@ export const FeedbackModal: React.FC<FeedbackModalProps> = ({ isOpen, onClose })
                         <Star className="h-3 w-3 fill-amber-400" /> {item.rating}/5
                       </div>
                     </div>
-                    <p className="text-slate-300 text-[11px] italic">"{item.comments}"</p>
+                    <p className="text-slate-300 text-[11px] italic">&quot;{item.comments}&quot;</p>
                   </div>
                 ))}
               </div>
