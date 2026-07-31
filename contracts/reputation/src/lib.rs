@@ -1,6 +1,9 @@
 #![no_std]
 use soroban_sdk::{contract, contractimpl, contracttype, Address, Env};
 
+#[cfg(test)]
+mod test;
+
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct SMEReputation {

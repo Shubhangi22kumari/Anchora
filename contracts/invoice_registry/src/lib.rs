@@ -1,6 +1,9 @@
 #![no_std]
 use soroban_sdk::{contract, contractimpl, contracttype, Address, BytesN, Env, Symbol};
 
+#[cfg(test)]
+mod test;
+
 #[contracttype]
 #[derive(Clone, Copy, Debug, Eq, PartialEq)]
 pub enum InvoiceStatus {
